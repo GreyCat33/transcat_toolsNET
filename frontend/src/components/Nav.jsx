@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css"; // Assuming you have a CSS file for styling
+import LoginButton from "./LogIn";
 export default function Nav() {
     return (
         <nav>
@@ -22,6 +23,9 @@ export default function Nav() {
                             </Link>
                         </li>
                     </ul>
+                </div>
+                <div>
+                    <LoginButton />
                 </div>
             </div>
         </nav>
