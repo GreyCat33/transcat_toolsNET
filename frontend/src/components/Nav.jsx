@@ -22,6 +22,11 @@ export default function Nav() {
                                 Users
                             </Link>
                         </li>
+                         <li>
+                            <Link className="navbar-link"  to="/authuser">
+                                Auth User 
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div>
