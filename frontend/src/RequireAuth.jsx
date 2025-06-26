@@ -19,3 +19,7 @@ export default function RequireAuth({ children }) {
 
   return children;
 }
+
+// The RequireAuth component checks if the user is authenticated. If not we are prompted to log in.
+// This will then return the app component and load the page. This was created to run when the index page is loaded, this component
+// will render first. 
