@@ -8,3 +8,7 @@ const LoginButton = () => {
 };
 
 export default LoginButton;
+
+// This will probably be discontinued, used it at first to test the application to cause a redirect to authenticate with auth0.
+// For now will keep in the case we will go this route. 
+// Its quite simple to follow that we call a function from the Auth0 hook to init login. 
