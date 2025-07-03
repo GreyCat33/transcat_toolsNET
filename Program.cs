@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TranscatTools.Infrastructure.Data;
-using Auth0.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,28 +23,25 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //Register authentication to services
 
-// For dev we can run on http 
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-    options.Secure = CookieSecurePolicy.None; 
-});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  .AddJwtBearer(options =>
+  {
+    // Auth0 issuer URI 
+    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
 
-// auth0 guide for cookie config for HTTPS
-/*
-    builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-    options.Secure = CookieSecurePolicy.Always; 
-});
-*/
+    // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
+    options.Audience = builder.Configuration["Auth0:Audience"];
 
-builder.Services.AddAuth0WebAppAuthentication(options =>
-{
-    options.Domain = builder.Configuration["Auth0:Domain"];
-    options.ClientId = builder.Configuration["Auth0:ClientId"];
-});
+    // // 3) map the “sub” or “name” claim to User.Identity.Name
+    // options.TokenValidationParameters = new TokenValidationParameters
+    // {
+    //   NameClaimType = "name"
+    // };
+  });
 
+
+// Also add Authorization so [Authorize] works
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

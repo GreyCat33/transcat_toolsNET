@@ -25,7 +25,7 @@ export default function Users() {
 
         };
         fetchUsers();
-    }, []);
+    }, [getAccessTokenSilently]);
 
     return (
         <div className="Users">

@@ -10,6 +10,7 @@ import RequireAuth from './RequireAuth.jsx';
 
 const domain = import.meta.env.VITE_Okta_Domain
 const clientId = import.meta.env.VITE_Okta_Client_Id;
+const audience = import.meta.env.VITE_AUTH0_AUDIENCE
 //We wrap our main path of the app page to require authentication,
 // After the user logs in, they will be redirected to the main page
 createRoot(document.getElementById('root')).render(
@@ -19,12 +20,13 @@ createRoot(document.getElementById('root')).render(
         domain= {domain}
         clientId= {clientId}
         authorizationParams={{
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
+        audience: audience
       }}
     >
       <BrowserRouter>
       <Routes>
-        <Route path="*" element={
+        <Route path="/*" element={
           <RequireAuth>
             <StrictMode>
                 <App />
