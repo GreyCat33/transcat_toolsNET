@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using TranscatTools.Infrastructure.Data;
+using Auth0.AspNetCore.Authentication;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1) Register MVC controllers (and JSON options, if needed)
+// 1) Register MVC controllers 
 builder.Services.AddControllers();
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 
 
@@ -17,6 +19,31 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
+
+//Register authentication to services
+
+// For dev we can run on http 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.None; 
+});
+
+// auth0 guide for cookie config for HTTPS
+/*
+    builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.Always; 
+});
+*/
+
+builder.Services.AddAuth0WebAppAuthentication(options =>
+{
+    options.Domain = builder.Configuration["Auth0:Domain"];
+    options.ClientId = builder.Configuration["Auth0:ClientId"];
+});
+
 
 var app = builder.Build();
 
@@ -50,6 +77,10 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast");
 
 app.MapControllers();
+
+// we add authentication and authorization middleware
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
 
