@@ -6,6 +6,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import Nav from './components/Nav'
 import './App.css'
 import AuthUser from './pages/AuthUser'
+import UsersTable from './pages/UsersTable'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path='/authuser' element={<AuthUser />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/userreport" element={<UsersTable />} />
         </Routes>
       </div>
     </>

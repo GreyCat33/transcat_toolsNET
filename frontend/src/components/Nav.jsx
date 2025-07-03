@@ -27,6 +27,11 @@ export default function Nav() {
                                 Auth User 
                             </Link>
                         </li>
+                        <li>
+                            <Link className="navbar-link"  to="/userreport">
+                               User Report
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div>
