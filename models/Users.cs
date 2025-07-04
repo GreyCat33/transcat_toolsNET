@@ -16,13 +16,13 @@ namespace TranscatTools.Domain.Entities
         
         [Required]
         [Column("firstname")]
-        public string FirstName { get; set; }
+        public string? FirstName { get; set; }
 
         [Required]
         [Column("lastname")]
-        public string LastName { get; set; }
+        public string? LastName { get; set; }
 
         [Column("phonenumber")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 }
