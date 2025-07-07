@@ -24,5 +24,11 @@ namespace TranscatTools.Domain.Entities
 
         [Column("phonenumber")]
         public string? PhoneNumber { get; set; }
+
+        [Column("email")]
+        public string? Email { get; set; }
+
+        [Column("role")]
+        public string? Role { get; set; }
     }
 }
