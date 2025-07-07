@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\greyes\\Desktop\\Transcat NET\\TranscatTools\\TranscatTools.csproj": {}
+    "D:\\Users\\greyes\\Desktop\\Transcat NET\\Test\\transcat_toolsNET\\TranscatTools.csproj": {}
   },
   "projects": {
-    "D:\\Users\\greyes\\Desktop\\Transcat NET\\TranscatTools\\TranscatTools.csproj": {
+    "D:\\Users\\greyes\\Desktop\\Transcat NET\\Test\\transcat_toolsNET\\TranscatTools.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\greyes\\Desktop\\Transcat NET\\TranscatTools\\TranscatTools.csproj",
+        "projectUniqueName": "D:\\Users\\greyes\\Desktop\\Transcat NET\\Test\\transcat_toolsNET\\TranscatTools.csproj",
         "projectName": "TranscatTools",
-        "projectPath": "D:\\Users\\greyes\\Desktop\\Transcat NET\\TranscatTools\\TranscatTools.csproj",
+        "projectPath": "D:\\Users\\greyes\\Desktop\\Transcat NET\\Test\\transcat_toolsNET\\TranscatTools.csproj",
         "packagesPath": "D:\\Users\\greyes\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\greyes\\Desktop\\Transcat NET\\TranscatTools\\obj\\",
+        "outputPath": "D:\\Users\\greyes\\Desktop\\Transcat NET\\Test\\transcat_toolsNET\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
