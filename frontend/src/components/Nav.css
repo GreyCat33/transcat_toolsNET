@@ -1,0 +1,23 @@
+nav{
+    background-color: rgb(63, 81, 181);
+    color: white;
+    width: 100%;
+}
+.Nav-Right-Container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.navbar-link {
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.navLinks-container {
+    display: flex;
+    list-style-type: none;
+    
+}

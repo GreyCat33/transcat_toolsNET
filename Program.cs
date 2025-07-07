@@ -1,13 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using TranscatTools.Infrastructure.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1) Register MVC controllers (and JSON options, if needed)
+// 1) Register MVC controllers 
 builder.Services.AddControllers();
 
 // Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 builder.Services.AddOpenApi();
 
 
@@ -17,6 +20,23 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
+
+//Register authentication to services
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+  .AddJwtBearer(options =>
+  {
+    // Auth0 issuer URI 
+    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
+
+    // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
+    options.Audience = builder.Configuration["Auth0:Audience"];
+
+  });
+
+
+// Also add Authorization so [Authorize] works
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
@@ -50,6 +70,10 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast");
 
 app.MapControllers();
+
+// we add authentication and authorization middleware
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
 
