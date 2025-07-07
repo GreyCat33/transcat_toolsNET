@@ -27,11 +27,11 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
       <Routes>
         <Route path="/*" element={
-          <RequireAuth>
+          
             <StrictMode>
                 <App />
               </StrictMode>
-          </RequireAuth>
+          
           } />
       </Routes>
       
