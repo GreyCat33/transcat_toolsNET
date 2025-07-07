@@ -40,7 +40,7 @@ export default function Users() {
                     <ul>
                         {users.map(user => (
                             <li key={user.id}>
-                                {user.firstName} - {user.phoneNumber} 
+                                {user.firstName} - {user.phoneNumber} - {user.email} - {user.role} 
                             </li>
                         ))}
                     </ul>
