@@ -1,15 +1,41 @@
-import { useState } from 'react'
+
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Users from './pages/Users'
 import NotFoundPage from './pages/NotFoundPage'
+import Nav from './components/Nav'
 import './App.css'
+import AuthUser from './pages/AuthUser'
+import UsersTable from './pages/UsersTable'
+import Logout from './pages/Logout'
+import { withAuthenticationRequired } from '@auth0/auth0-react'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <NotFoundPage />
+    
+    <Nav />
+
+      <div style={{ padding: '20px', display: 'flex', justifyContent: 'center' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/users" element={<Users />} />
+          <Route path='/authuser' element={<AuthUser />} />
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/userreport" element={<UsersTable />} />
+          <Route path="/logout" element={<Logout />} />
+        </Routes>
+      </div>
     </>
+
   )
 }
 
-export default App
+// We can use the Okta guard instead of the RequireAuth component 
+
+export default withAuthenticationRequired(App, {
+  onRedirecting: () => <div>Loading...</div>,
+});
+
+//export default App
