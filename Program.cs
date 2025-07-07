@@ -32,11 +32,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
     options.Audience = builder.Configuration["Auth0:Audience"];
 
-    // // 3) map the “sub” or “name” claim to User.Identity.Name
-    // options.TokenValidationParameters = new TokenValidationParameters
-    // {
-    //   NameClaimType = "name"
-    // };
   });
 
 
