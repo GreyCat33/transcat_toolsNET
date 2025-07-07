@@ -1,17 +1,29 @@
-Git clone repo
+Git clone repo (terminal commands)
 
-cd transcat_toolsNET
+1) Change to Repo directory
+	cd transcat_toolsNET
 
-dotnet build | or dotnet run | or dotnet restore, dotnet build, then dotnet run 
-	- get the details for your SQL server and Okta and paste them to the appsettings.json
-	file
+2) You can run any of these commands while in the directory to download package dependencies
 
-cd frontend
+	-dotnet build 
+	-dotnet run
+	-dotnet restore, then dotnet build, then dotnet run 
 
-npm install
+3) Make sure to get the appsettings.json variables and paste them or fill em in.
+	
 
-	-Get the okta variables 
+4) Change over to the frontend side
+	-cd frontend
 
-now you can dotnet run on the main directory folder (transcat_toolsNET)
+5) Run npm command to download dependencies 
+	-npm install
 
-and npm run dev in /frontend
+6) Get the Okta variables and paste them to .env.development file
+	
+
+7) now you can us the  dotnet run command on the main directory folder (transcat_toolsNET)
+	-dontnet run
+
+8) Ditto for the /frontend folder, the command is npm run dev
+	-npm run dev
+
