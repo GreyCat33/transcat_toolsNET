@@ -2,7 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css"; // Assuming you have a CSS file for styling
 import LoginButton from "./LogIn";
+import LogoutButton from "./Logout";
+import { useAuth0 } from "@auth0/auth0-react";
 export default function Nav() {
+    const { isAuthenticated, user, logout } = useAuth0();
     return (
         <nav>
             <div className="Nav-Right-Container">
@@ -24,7 +27,7 @@ export default function Nav() {
                         </li>
                          <li>
                             <Link className="navbar-link"  to="/authuser">
-                                Auth User 
+                                User Info
                             </Link>
                         </li>
                         <li>
@@ -35,7 +38,16 @@ export default function Nav() {
                     </ul>
                 </div>
                 <div>
-                    <LoginButton />
+                    {
+                        !isAuthenticated && (<LoginButton />)
+                    }
+                    
+                    
+                    {/* // we check to see if we are authenticated */}
+                    {isAuthenticated && ( 
+                       <LogoutButton />
+                    )
+                    }
                 </div>
             </div>
         </nav>
