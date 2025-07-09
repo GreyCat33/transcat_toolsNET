@@ -11,7 +11,17 @@ namespace TranscatTools.Infrastructure.Data
         {
         }
 
-        public DbSet<PriceItem> PriceItems { get; set; }
+        public DbSet<CategoryOptionTranslation> CategoryOptions { get; set; }
+
+        public DbSet<ServiceCategoryTranslation> ServiceCategory { get; set; }
+
+
+        public DbSet<ServiceItemOptionTranslation> ServiceItemOptions { get; set; }
+
+        public DbSet<ServiceItemsTranslation> ServiceItems { get; set; }
+
+        public DbSet<ServiceItemDisabledServiceLevel> ServiceItemDisabledServiceLevels { get; set; }
+        
        
     }
 }

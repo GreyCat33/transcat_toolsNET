@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TranscatTools.Infrastructure.Data;
 using TranscatTools.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization; 
 
 [ApiController]

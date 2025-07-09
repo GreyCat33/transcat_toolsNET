@@ -35,6 +35,11 @@ export default function Nav() {
                                User Report
                             </Link>
                         </li>
+                        <li>
+                            <Link className="navbar-link"  to="/pricing">
+                               Pricing Tests
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div>

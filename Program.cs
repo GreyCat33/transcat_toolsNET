@@ -21,6 +21,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     )
 );
 
+// Register our PricingDbContext to the builder
+builder.Services.AddDbContext<PricingDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("PricingDBConnection")
+    )
+);
+
 //Register authentication to services
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
