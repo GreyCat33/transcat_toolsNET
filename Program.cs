@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // 1) Register MVC controllers 
@@ -13,8 +14,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
-
-//Register our MS SQL instance to the builder 
+// //Register our MS SQL instance to the builder 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
@@ -33,17 +33,26 @@ builder.Services.AddDbContext<PricingDbContext>(options =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
   .AddJwtBearer(options =>
   {
-    // Auth0 issuer URI 
-    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
+      // Auth0 issuer URI 
+      options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
 
-    // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
-    options.Audience = builder.Configuration["Auth0:Audience"];
+      // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
+      options.Audience = builder.Configuration["Auth0:Audience"];
+
+      // to consume our action from Auth0
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            NameClaimType = "name", // This is the claim that contains the user's name
+            RoleClaimType = "http://localhost:5173/claims/roles'", // This is the claim that contains the user's roles
+            // We can add more validation parameters here if needed
+        };
 
   });
 
 
 // Also add Authorization so [Authorize] works
 builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
@@ -64,7 +73,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -76,11 +85,13 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-app.MapControllers();
-
 // we add authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+app.MapControllers();
+
 
 app.Run();
 
