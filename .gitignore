@@ -11,3 +11,6 @@ models/Okta.cs
 Service/OktaMGMTApiService.cs
 Controller/OktaController.cs
 Controller/OktaController.cs
+publish/
+publish/Azure.Core.dll
+wwwroot/

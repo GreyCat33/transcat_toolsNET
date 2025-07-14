@@ -9,7 +9,7 @@ export default function Logout() {
     };
 
     return (
-        <button className="logout-button" onClick={handleLogout}>
+        <button style={{margin:"0 10px"}} onClick={handleLogout}>
             Logout
         </button>
     );

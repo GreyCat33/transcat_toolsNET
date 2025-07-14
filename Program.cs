@@ -70,6 +70,7 @@ if (app.Environment.IsDevelopment())
 // It ensures that the app redirects HTTP requests to HTTPS
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
 
 // we add authentication and authorization middleware
 app.UseAuthentication();
@@ -78,6 +79,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//To render static files from wwwroot
+app.MapFallbackToFile("index.html");
 
 app.Run();
 

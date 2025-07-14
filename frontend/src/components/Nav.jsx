@@ -4,6 +4,7 @@ import "./Nav.css"; // Assuming you have a CSS file for styling
 import LoginButton from "./LogIn";
 import LogoutButton from "./Logout";
 import { useAuth0 } from "@auth0/auth0-react";
+import UserCircle from "./UserCircle"; // Assuming you have a UserCircle component
 export default function Nav() {
     const { isAuthenticated, user, logout } = useAuth0();
     return (
@@ -42,19 +43,18 @@ export default function Nav() {
                         </li>
                     </ul>
                 </div>
-                <div>
-                    {
-                        !isAuthenticated && (<LoginButton />)
-                    }
+                
+            </div>
+
+            <div className="user-container">
                     
-                    
+                    {isAuthenticated && <UserCircle />}
                     {/* // we check to see if we are authenticated */}
                     {isAuthenticated && ( 
                        <LogoutButton />
                     )
                     }
                 </div>
-            </div>
         </nav>
     );
 }
