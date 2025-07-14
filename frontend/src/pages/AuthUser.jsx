@@ -4,7 +4,8 @@ import Auth0User from '../components/Auth0User';
 import AdminReport from '../components/AdminReport';
 export default function AuthUser() {
     const { user, isAuthenticated, isLoading } = useAuth0();
-
+    console.log("User information:", user);
+    console.log("user id:", user.sub);
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             {isLoading && <div>Loading...</div>}
@@ -19,8 +20,7 @@ export default function AuthUser() {
 
             <h3>Auth0 User Info</h3>
             <Auth0User />
-
-            {/* <AdminReport /> */}
+            <AdminReport />
         </div>
     );
 }

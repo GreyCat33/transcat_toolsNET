@@ -12,6 +12,18 @@ namespace TranscatTools.Infrastructure.Data
         }
 
         public DbSet<User> Users { get; set; }
-       
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ApplicationUser>()
+                .HasIndex(u => u.OktaUserId)
+                .IsUnique();
+        }
+
     }
+    
+    
 }

@@ -11,8 +11,12 @@ import Logout from './pages/Logout'
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import PricingDBTests from './pages/PricingDBTests'
 
+import UserTest from './components/UserTest'
 
 function App() {
+
+  //we are authenticated so, lets sync our user
+ UserTest();
   return (
     <>
     
