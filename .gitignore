@@ -7,3 +7,6 @@ ignore.json
 publish/Azure.Core.dll
 publish/
 wwwroot/
+Controller/AdminController.cs
+Service/OktaMGMTApiService.cs
+models/Okta.cs
