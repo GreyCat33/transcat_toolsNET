@@ -4,3 +4,6 @@ appsettings.Development.json
 obj/
 .env
 ignore.json
+publish/Azure.Core.dll
+publish/
+wwwroot/
