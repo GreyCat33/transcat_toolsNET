@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using TranscatTools.Infrastructure.Data;
 using TranscatTools.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization; 
 
 [ApiController]
@@ -18,7 +16,7 @@ public class UsersController : ControllerBase
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> Get() =>
-        Ok(await _db.Users.ToListAsync());
+        Ok (await _db.Users.ToListAsync());
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] User user)

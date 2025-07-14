@@ -9,9 +9,14 @@ import AuthUser from './pages/AuthUser'
 import UsersTable from './pages/UsersTable'
 import Logout from './pages/Logout'
 import { withAuthenticationRequired } from '@auth0/auth0-react'
+import PricingDBTests from './pages/PricingDBTests'
 
+import UserTest from './components/UserTest'
 
 function App() {
+
+  //we are authenticated so, lets sync our user
+ UserTest();
   return (
     <>
     
@@ -25,6 +30,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/userreport" element={<UsersTable />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/pricing" element={<PricingDBTests />} />
         </Routes>
       </div>
     </>

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // 1) Register MVC controllers 
@@ -13,30 +15,47 @@ builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
-
-//Register our MS SQL instance to the builder 
+// //Register our MS SQL instance to the builder 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
 
+// Register our PricingDbContext to the builder
+builder.Services.AddDbContext<PricingDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("PricingDBConnection")
+    )
+);
+
 //Register authentication to services
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-  .AddJwtBearer(options =>
-  {
+    .AddJwtBearer(options =>
+{
+    
     // Auth0 issuer URI 
     options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
 
     // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
     options.Audience = builder.Configuration["Auth0:Audience"];
 
-  });
+    // to consume our action from Auth0
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        NameClaimType = "name", // This is the claim that contains the user's name
+        RoleClaimType = "http://localhost:5173/claims/roles", // This is the claim that contains the user's roles
+                                                              // We can add more validation parameters here if needed
+    };
+
+ 
+});
 
 
 // Also add Authorization so [Authorize] works
 builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
@@ -47,37 +66,21 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
+// This is to handle HTTPS redirection
+// It ensures that the app redirects HTTP requests to HTTPS
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
-app.MapControllers();
+app.UseStaticFiles();
 
 // we add authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+app.MapControllers();
+
+//To render static files from wwwroot
+app.MapFallbackToFile("index.html");
+
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
