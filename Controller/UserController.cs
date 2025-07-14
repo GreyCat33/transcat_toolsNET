@@ -16,7 +16,7 @@ public class UsersController : ControllerBase
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> Get() =>
-        Ok(await _db.Users.ToListAsync());
+        Ok (await _db.Users.ToListAsync());
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] User user)
