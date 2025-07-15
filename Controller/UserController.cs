@@ -19,6 +19,7 @@ public class UsersController : ControllerBase
         Ok (await _db.Users.ToListAsync());
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] User user)
     {
         _db.Users.Add(user);
@@ -27,15 +28,17 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetById(int id)
     {
         var user = await _db.Users.FindAsync(id);
         if (user == null)
-            return NotFound();  
-        return Ok(user);    
+            return NotFound();
+        return Ok(user);
     }
 
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<IActionResult> Update(int id, [FromBody] User user)
     {
         if (id != user.Id)
@@ -47,6 +50,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> Delete(int id)
     {
         var user = await _db.Users.FindAsync(id);

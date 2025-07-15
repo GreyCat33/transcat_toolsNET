@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import OktaUser from '../components/OktaUser';
+
 import Auth0User from '../components/Auth0User';
 import AdminReport from '../components/AdminReport';
 export default function AuthUser() {
