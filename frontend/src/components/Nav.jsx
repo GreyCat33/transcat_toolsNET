@@ -48,13 +48,9 @@ export default function Nav() {
 
             <div className="user-container">
                     
-                    {isAuthenticated && <UserCircle />}
-                    {/* // we check to see if we are authenticated */}
-                    {isAuthenticated && ( 
-                       <LogoutButton />
-                    )
-                    }
-                </div>
+                {isAuthenticated && <UserCircle />}
+                    
+            </div>
         </nav>
     );
 }

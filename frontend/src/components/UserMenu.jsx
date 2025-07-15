@@ -1,6 +1,8 @@
-export default function UserMenu({user, onLogout}){
+import Logout from "./Logout"
+export default function UserMenu({user, onLogout,onMouseLeave}){
     return (
         <div
+            onMouseLeave={onMouseLeave}
             style={{
                 position:"absolute",
                 top:"100%",
@@ -12,10 +14,14 @@ export default function UserMenu({user, onLogout}){
                 boxShadow:"0 4px 8px rgba(0,0,0,0.1)",
                 borderRadius:"8px",
                 minWidth:"300px",
-                zIndex:"1000"
+                zIndex:"1000",
+                display:"flex",
+                flexDirection:"column",
+                alignItems:"center"
             }}
         >
 
+            <hr />
             <p style={{margin: "4px 0", fontSize:"14", wordBreak:"break-all"}}>
                 <strong>ID: </strong>
                 
@@ -26,6 +32,8 @@ export default function UserMenu({user, onLogout}){
                 
                 {user.email}
             </p>
+            <hr />
+            <Logout />
         </div>
     )
 }

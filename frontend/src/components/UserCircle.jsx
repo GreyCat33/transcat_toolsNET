@@ -10,9 +10,9 @@ export default function UserCircle() {
         logout({returnTo: window.location.origin});
 
     return (
+      
         <div 
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
+            
             style={
                 { 
                     display: 'inline-flex',
@@ -30,9 +30,16 @@ export default function UserCircle() {
                 alt={user.name} 
                 style={{borderRadius:"50%", display:"block", cursor:"pointer"}}
                 onMouseEnter={() => setIsOpen(true)}
-                onMouseLeave={() => setIsOpen(false)}
+                
             />
-            {isOpen && <UserMenu user={user} onLogout={handleLogout} />}
+            {isOpen && 
+                <UserMenu 
+                    user={user} 
+                    onLogout={handleLogout}
+                    onMouseLeave={() => setIsOpen(false)}
+                />
+            }
         </div>
+        
     );
 }
