@@ -81,7 +81,7 @@ export default function UsersTable() {
 
     return (
         <div style={{ padding: 20 }}>
-            <h2>Users</h2>
+            <h2>Users Table from DB</h2>
             <table border="1" cellPadding="8" style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                     <tr>
