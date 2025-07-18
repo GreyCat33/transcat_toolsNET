@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
-import AdminReport from '../components/AdminReport';
+import UserReport from '../components/UserReport';
 import UserCard from '../components/User Info/UserCard';
 import DownloadButton from '../components/UI/DownloadButton';
 export default function AuthUser() {
@@ -19,7 +19,7 @@ export default function AuthUser() {
                 </div>
                 
             </div>
-            <AdminReport />
+            <UserReport />
         </div>
     );
 }
