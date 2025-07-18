@@ -4,14 +4,12 @@ appsettings.Development.json
 obj/
 .env
 ignore.json
-<<<<<<< HEAD
 publish/Azure.Core.dll
 publish/
 wwwroot/
 Controller/AdminController.cs
 Service/OktaMGMTApiService.cs
 models/Okta.cs
-=======
 Controller/AdminController.cs
 frontend/src/components/AdminReport.jsx
 frontend/src/components/OktaUser.jsx
@@ -22,4 +20,3 @@ Controller/OktaController.cs
 publish/
 publish/Azure.Core.dll
 wwwroot/
->>>>>>> dev
