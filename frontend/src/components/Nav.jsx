@@ -1,17 +1,15 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import "./Nav.css"; // Assuming you have a CSS file for styling
-import LoginButton from "./LogIn";
-import LogoutButton from "./Logout";
+import "./Nav.css"; 
 import { useAuth0 } from "@auth0/auth0-react";
-import UserCircle from "./UserCircle"; // Assuming you have a UserCircle component
+import UserCircle from "./User Info/UserCircle"; 
+import logoImg from "../assets/logo.png"
 export default function Nav() {
-    const { isAuthenticated, user, logout } = useAuth0();
+    const { isAuthenticated,user} = useAuth0();
     return (
         <nav>
-            <div className="Nav-Right-Container">
+            <div className="nav-right-container">
                 <Link to="/" className="navbar-brand">
-                    <img src="./src/assets/logo.png" alt="Logo" className="logo" width={"150px"} style={{objectFit:"contain", padding:"0 20px"}}/>
+                    <img src={logoImg} alt="Logo" className="logo" width={"150px"} style={{objectFit:"contain", padding:"0 20px"}}/>
                 </Link>
                 
                 <div id="navbarNav">
@@ -47,7 +45,7 @@ export default function Nav() {
             </div>
 
             <div className="user-container">
-                    
+                {isAuthenticated && user.nickname}
                 {isAuthenticated && <UserCircle />}
                     
             </div>
