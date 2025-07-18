@@ -1,11 +1,11 @@
 nav{
     background-color: rgb(63, 81, 181);
     color: white;
-    width: 100%;
+    
     display: flex;
     justify-content: space-between;
 }
-.Nav-Right-Container {
+.nav-right-container {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -25,9 +25,9 @@ nav{
 }
 
 .user-container {
-    background-color: seagreen;
+    
     display: flex;
     align-items: center;
-    padding: 0 10px;
+    
     
 }

@@ -11,8 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // 1) Register MVC controllers 
 builder.Services.AddControllers();
 
-// Add services to the container.
-
+// Add services to the container. <-- For Api calls
 builder.Services.AddOpenApi();
 
 // //Register our MS SQL instance to the builder 
@@ -22,15 +21,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     )
 );
 
-// Register our PricingDbContext to the builder
 builder.Services.AddDbContext<PricingDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("PricingDBConnection")
     )
 );
 
-//Register authentication to services
-
+// AUth0 Middleware
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
 {
@@ -44,16 +41,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     // to consume our action from Auth0
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        NameClaimType = "name", // This is the claim that contains the user's name
-        RoleClaimType = "http://localhost:5173/claims/roles", // This is the claim that contains the user's roles
-                                                              // We can add more validation parameters here if needed
+        //We use this so only users with Admin role are authorized in whatever we designate
+        // [Authorize (Roles = "Admin)]
+        NameClaimType = "name", 
+        RoleClaimType = "http://localhost:5173/claims/roles", 
+                                                              
     };
 
  
 });
 
 
-// Also add Authorization so [Authorize] works
+// Add Authorization so [Authorize] works
 builder.Services.AddAuthorization();
 
 
@@ -70,8 +69,6 @@ if (app.Environment.IsDevelopment())
 // It ensures that the app redirects HTTP requests to HTTPS
 app.UseHttpsRedirection();
 
-app.UseStaticFiles();
-
 // we add authentication and authorization middleware
 app.UseAuthentication();
 app.UseAuthorization();
@@ -80,6 +77,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 //To render static files from wwwroot
+
+app.UseStaticFiles();
 app.MapFallbackToFile("index.html");
 
 app.Run();

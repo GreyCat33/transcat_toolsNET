@@ -1,9 +1,11 @@
 // src/UsersPage.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function UsersTable() {
     const [users, setUsers] = useState([]);
+    const { getAccessTokenSilently } = useAuth0();
     const [editingId, setEditingId] = useState(null);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -12,11 +14,24 @@ export default function UsersTable() {
     });
 
     // Fetch users on mount
-    useEffect(() => {
-        axios.get('/api/users')
-            .then(res => setUsers(res.data))
-            .catch(console.error);
-    }, []);
+    useEffect( () => {
+        // const token = await getAccessTokenSilently();
+        // axios.get('/api/users',{
+        //     headers: { Authorization: `Bearer ${token}` }
+        // })
+        //     .then(res => setUsers(res.data))
+        //     .catch(console.error);
+
+        (async () => {
+      const token = await getAccessTokenSilently();
+      const res   = await axios.get('/api/users', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      setUsers(res.data);
+      
+    })();
+    }, [getAccessTokenSilently]);
 
     // Start editing a row
     const handleEdit = user => {
@@ -66,7 +81,7 @@ export default function UsersTable() {
 
     return (
         <div style={{ padding: 20 }}>
-            <h2>Users</h2>
+            <h2>Users Table from DB</h2>
             <table border="1" cellPadding="8" style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                     <tr>
