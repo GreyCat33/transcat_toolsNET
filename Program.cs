@@ -15,41 +15,43 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // //Register our MS SQL instance to the builder 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    )
-);
+//For staging 1.0 we commented this out to prevent connection to a MS Sql instance
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseSqlServer(
+//         builder.Configuration.GetConnectionString("DefaultConnection")
+//     )
+// );
 
-builder.Services.AddDbContext<PricingDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("PricingDBConnection")
-    )
-);
+// builder.Services.AddDbContext<PricingDbContext>(options =>
+//     options.UseSqlServer(
+//         builder.Configuration.GetConnectionString("PricingDBConnection")
+//     )
+// );
 
 // AUth0 Middleware
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-{
-    
-    // Auth0 issuer URI 
-    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
+// Ditto for the auth0
+// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//     .AddJwtBearer(options =>
+// {
 
-    // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
-    options.Audience = builder.Configuration["Auth0:Audience"];
+//     // Auth0 issuer URI 
+//     options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
 
-    // to consume our action from Auth0
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        //We use this so only users with Admin role are authorized in whatever we designate
-        // [Authorize (Roles = "Admin)]
-        NameClaimType = "name", 
-        RoleClaimType = "http://localhost:5173/claims/roles", 
-                                                              
-    };
+//     // 2) Audience = the API Identifier you set up in Auth0’s APIs dashboard
+//     options.Audience = builder.Configuration["Auth0:Audience"];
 
- 
-});
+//     // to consume our action from Auth0
+//     options.TokenValidationParameters = new TokenValidationParameters
+//     {
+//         //We use this so only users with Admin role are authorized in whatever we designate
+//         // [Authorize (Roles = "Admin)]
+//         NameClaimType = "name", 
+//         RoleClaimType = "http://localhost:5173/claims/roles", 
+
+//     };
+
+
+// });
 
 
 // Add Authorization so [Authorize] works

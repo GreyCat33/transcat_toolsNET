@@ -12,6 +12,7 @@ import { withAuthenticationRequired } from '@auth0/auth0-react'
 import PricingDBTests from './pages/PricingDBTests'
 
 import UserTest from './components/UserTest'
+import SimpleNav from './components/Ui/SimpleNav'
 
 function App() {
 
@@ -19,8 +20,9 @@ function App() {
  UserTest();
   return (
     <>
-    
-    <Nav />
+    {/* For staging 1.0 this was commented out, uncomment when okta component is out */}
+    {/* <Nav /> */}
+    <SimpleNav />
 
       <div style={{ padding: '20px', display: 'flex', justifyContent: 'center' }}>
         <Routes>
@@ -39,9 +41,9 @@ function App() {
 }
 
 // We can use the Okta guard instead of the RequireAuth component 
+// For staging 1.0 this is commented out to not require okta auth
+// export default withAuthenticationRequired(App, {
+//   onRedirecting: () => <div>Loading...</div>,
+// });
 
-export default withAuthenticationRequired(App, {
-  onRedirecting: () => <div>Loading...</div>,
-});
-
-//export default App
+export default App
