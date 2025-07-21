@@ -20,3 +20,4 @@ Controller/OktaController.cs
 publish/
 publish/Azure.Core.dll
 wwwroot/
+obj/Debug/net9.0/TranscatTools.sourcelink.json
